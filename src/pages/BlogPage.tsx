@@ -18,6 +18,28 @@ const parseBodyPoints = (body: string) =>
       isHeading: /^##\s*/.test(item),
     }))
 
+const emojiRegex = /[\u{1F000}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u
+
+function extractEmoji(text: string): string | null {
+  const match = text.match(emojiRegex)
+  return match ? match[0] : null
+}
+
+function renderSubIcon(subIcon: string, parentKicker: string | null) {
+  const kickerEmoji = !subIcon && parentKicker ? extractEmoji(parentKicker) : null
+  const rawIcon = subIcon || kickerEmoji
+
+  if (!rawIcon) return null
+
+  const normalized = rawIcon.replace(/^['"]|['"]$/g, '').trim().toLowerCase()
+
+  if (normalized === 'leaf') {
+    return <Leaf className="blog-nested-icon blog-nested-icon-leaf" size={22} />
+  }
+
+  return <span className="blog-nested-icon">{rawIcon}</span>
+}
+
 function BlogPage() {
   const [sections, setSections] = useState<BlogSectionRecord[]>([])
   const [loading, setLoading] = useState(true)
@@ -138,13 +160,7 @@ function BlogPage() {
                         {item.sub_sections.map((sub, idx) => (
                           <div key={idx} className="blog-nested-item">
                             <div className="blog-nested-item-header">
-                              {sub.icon ? (
-                                sub.icon === 'leaf' ? (
-                                  <Leaf className="blog-nested-icon blog-nested-icon-leaf" size={22} />
-                                ) : (
-                                  <span className="blog-nested-icon">{sub.icon}</span>
-                                )
-                              ) : null}
+                              {renderSubIcon(sub.icon, item.kicker)}
                               {sub.heading ? <h3 className="blog-nested-item-heading">{sub.heading}</h3> : null}
                             </div>
                             {sub.description ? (

@@ -595,9 +595,9 @@ function BlogManagementPanel() {
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '0.5rem', marginBottom: '0.5rem' }}>
                               <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                                Icon/Emoji
+                                Icon
                                 <input
-                                  placeholder="🌿"
+                                  placeholder="Type emoji or 'leaf'"
                                   value={sub.icon}
                                   onChange={(event) => handleSubSectionChange(si, 'icon', event.target.value)}
                                   style={{ fontSize: '1.1rem' }}
