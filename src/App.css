@@ -5581,6 +5581,11 @@ body {
   text-decoration: underline;
 }
 
+.blog-nested-icon-leaf {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
   .blog-page-layout {
     padding-top: 5rem !important;

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Leaf } from 'lucide-react'
 import '../App.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -137,7 +138,13 @@ function BlogPage() {
                         {item.sub_sections.map((sub, idx) => (
                           <div key={idx} className="blog-nested-item">
                             <div className="blog-nested-item-header">
-                              {sub.icon ? <span className="blog-nested-icon">{sub.icon}</span> : null}
+                              {sub.icon ? (
+                                sub.icon === 'leaf' ? (
+                                  <Leaf className="blog-nested-icon blog-nested-icon-leaf" size={22} />
+                                ) : (
+                                  <span className="blog-nested-icon">{sub.icon}</span>
+                                )
+                              ) : null}
                               {sub.heading ? <h3 className="blog-nested-item-heading">{sub.heading}</h3> : null}
                             </div>
                             {sub.description ? (
