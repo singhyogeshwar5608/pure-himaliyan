@@ -30,7 +30,7 @@ RewriteRule ^ - [L]
 RewriteRule ^ index.html [L]
 
 # Security: deny access to dot-files
-<FilesMatch "^\.">
+<FilesMatch "^\\.">
     Require all denied
 </FilesMatch>
 `
