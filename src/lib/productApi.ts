@@ -1156,26 +1156,40 @@ export const reviewApi = {
   },
 }
 
+export type SubSectionSource = {
+  title: string
+  url: string
+}
+
+export type SubSectionItem = {
+  icon: string
+  heading: string
+  description: string
+  sources: SubSectionSource[]
+}
+
 export type BlogSectionRecord = {
   id: number
-  type: 'description' | 'comparison'
+  type: 'description' | 'comparison' | 'nested'
   display_order: number
   kicker: string | null
   heading: string | null
   body: string | null
   image_url: string | null
   comparison_data: string | null
+  sub_sections: SubSectionItem[] | null
   created_at: string
   updated_at: string
 }
 
 export type BlogSectionPayload = {
-  type: 'description' | 'comparison'
+  type: 'description' | 'comparison' | 'nested'
   display_order: number | ''
   kicker: string
   heading: string
   body: string
   comparison_data: string
+  sub_sections?: string
   image?: File | null
   remove_image?: boolean
 }
@@ -1188,6 +1202,9 @@ function buildBlogSectionFormData(payload: BlogSectionPayload): FormData {
   fd.append('heading', payload.heading)
   fd.append('body', payload.body)
   fd.append('comparison_data', payload.comparison_data)
+  if (payload.sub_sections) {
+    fd.append('sub_sections', payload.sub_sections)
+  }
   if (payload.image) {
     fd.append('image', payload.image)
   }
@@ -1224,6 +1241,7 @@ export async function updateBlogSection(id: number, payload: Partial<BlogSection
   if (payload.heading !== undefined) fd.append('heading', payload.heading)
   if (payload.body !== undefined) fd.append('body', payload.body)
   if (payload.comparison_data !== undefined) fd.append('comparison_data', payload.comparison_data)
+  if (payload.sub_sections !== undefined) fd.append('sub_sections', payload.sub_sections)
   if (payload.image) fd.append('image', payload.image)
   if (payload.remove_image) fd.append('remove_image', '1')
 

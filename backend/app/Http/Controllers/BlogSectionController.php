@@ -26,12 +26,13 @@ class BlogSectionController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
-            'type' => ['required', Rule::in(['description', 'comparison'])],
+            'type' => ['required', Rule::in(['description', 'comparison', 'nested'])],
             'display_order' => ['nullable', 'integer', 'min:0'],
             'kicker' => ['nullable', 'string', 'max:255'],
             'heading' => ['nullable', 'string', 'max:255'],
             'body' => ['nullable', 'string'],
             'comparison_data' => ['nullable', 'string'],
+            'sub_sections' => ['nullable', 'json'],
             'image' => ['nullable', 'image', 'max:10240'],
         ]);
 
@@ -42,6 +43,14 @@ class BlogSectionController extends Controller
             $imageUrl = '/storage/'.$path;
         }
 
+        $subSections = null;
+        if (!empty($data['sub_sections'])) {
+            $decoded = json_decode($data['sub_sections'], true);
+            if (is_array($decoded)) {
+                $subSections = $decoded;
+            }
+        }
+
         $item = BlogSection::query()->create([
             'type' => $data['type'],
             'display_order' => $data['display_order'] ?? 0,
@@ -50,6 +59,7 @@ class BlogSectionController extends Controller
             'body' => $data['body'] ?? null,
             'image_url' => $imageUrl,
             'comparison_data' => $data['comparison_data'] ?? null,
+            'sub_sections' => $subSections,
         ]);
 
         return response()->json([
@@ -61,12 +71,13 @@ class BlogSectionController extends Controller
     public function update(Request $request, BlogSection $blogSection): JsonResponse
     {
         $data = $request->validate([
-            'type' => ['nullable', Rule::in(['description', 'comparison'])],
+            'type' => ['nullable', Rule::in(['description', 'comparison', 'nested'])],
             'display_order' => ['nullable', 'integer', 'min:0'],
             'kicker' => ['nullable', 'string', 'max:255'],
             'heading' => ['nullable', 'string', 'max:255'],
             'body' => ['nullable', 'string'],
             'comparison_data' => ['nullable', 'string'],
+            'sub_sections' => ['nullable', 'json'],
             'image' => ['nullable', 'image', 'max:10240'],
             'remove_image' => ['nullable', 'boolean'],
         ]);
@@ -97,6 +108,16 @@ class BlogSectionController extends Controller
             $nextImageUrl = '/storage/'.$path;
         }
 
+        $subSections = $blogSection->sub_sections;
+        if (array_key_exists('sub_sections', $data)) {
+            if (!empty($data['sub_sections'])) {
+                $decoded = json_decode($data['sub_sections'], true);
+                $subSections = is_array($decoded) ? $decoded : null;
+            } else {
+                $subSections = null;
+            }
+        }
+
         $updateData = [
             'type' => $data['type'] ?? $blogSection->type,
             'display_order' => $data['display_order'] ?? $blogSection->display_order,
@@ -105,6 +126,7 @@ class BlogSectionController extends Controller
             'body' => array_key_exists('body', $data) ? $data['body'] : $blogSection->body,
             'image_url' => $nextImageUrl,
             'comparison_data' => array_key_exists('comparison_data', $data) ? $data['comparison_data'] : $blogSection->comparison_data,
+            'sub_sections' => $subSections,
         ];
 
         $blogSection->update($updateData);

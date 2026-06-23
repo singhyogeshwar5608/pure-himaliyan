@@ -2,16 +2,24 @@ import type { FormEvent } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import '../AdminPortal.css'
 import { fetchBlogSections, createBlogSection, updateBlogSection, deleteBlogSection, buildApiUrl } from '../lib/productApi'
-import type { BlogSectionPayload, BlogSectionRecord } from '../lib/productApi'
+import type { BlogSectionPayload, BlogSectionRecord, SubSectionItem, SubSectionSource } from '../lib/productApi'
 
 type SectionForm = {
-  type: 'description' | 'comparison'
+  type: 'description' | 'comparison' | 'nested'
   display_order: number | ''
   kicker: string
   heading: string
   body: string
   compColumns: string[]
   compRows: { label: string; values: string[] }[]
+  subSections: SubSectionItem[]
+}
+
+const emptySubSection: SubSectionItem = {
+  icon: '',
+  heading: '',
+  description: '',
+  sources: [],
 }
 
 const emptyForm: SectionForm = {
@@ -22,6 +30,7 @@ const emptyForm: SectionForm = {
   body: '',
   compColumns: ['Feature', 'Product A', 'Product B'],
   compRows: [],
+  subSections: [],
 }
 
 function BlogManagementPanel() {
@@ -100,6 +109,8 @@ function BlogManagementPanel() {
       } catch { /* ignore */ }
     }
 
+    const subSections: SubSectionItem[] = Array.isArray(item.sub_sections) ? item.sub_sections : []
+
     setForm({
       type: item.type,
       display_order: item.display_order,
@@ -108,6 +119,7 @@ function BlogManagementPanel() {
       body: item.body || '',
       compColumns,
       compRows,
+      subSections,
     })
     setEditingId(item.id)
     setFormError('')
@@ -191,6 +203,49 @@ function BlogManagementPanel() {
     handleChange('compRows', form.compRows.filter((_, i) => i !== index))
   }
 
+  const handleSubSectionChange = (index: number, field: keyof SubSectionItem, value: string) => {
+    const next = [...form.subSections]
+    next[index] = { ...next[index], [field]: value }
+    handleChange('subSections', next)
+  }
+
+  const addSubSection = () => {
+    handleChange('subSections', [...form.subSections, { ...emptySubSection }])
+  }
+
+  const removeSubSection = (index: number) => {
+    handleChange('subSections', form.subSections.filter((_, i) => i !== index))
+  }
+
+  const moveSubSection = (index: number, direction: -1 | 1) => {
+    const target = index + direction
+    if (target < 0 || target >= form.subSections.length) return
+    const next = [...form.subSections]
+    const temp = next[index]
+    next[index] = next[target]
+    next[target] = temp
+    handleChange('subSections', next)
+  }
+
+  const handleSourceChange = (subIndex: number, sourceIndex: number, field: keyof SubSectionSource, value: string) => {
+    const next = [...form.subSections]
+    next[subIndex] = { ...next[subIndex], sources: [...next[subIndex].sources] }
+    next[subIndex].sources[sourceIndex] = { ...next[subIndex].sources[sourceIndex], [field]: value }
+    handleChange('subSections', next)
+  }
+
+  const addSource = (subIndex: number) => {
+    const next = [...form.subSections]
+    next[subIndex] = { ...next[subIndex], sources: [...next[subIndex].sources, { title: '', url: '' }] }
+    handleChange('subSections', next)
+  }
+
+  const removeSource = (subIndex: number, sourceIndex: number) => {
+    const next = [...form.subSections]
+    next[subIndex] = { ...next[subIndex], sources: next[subIndex].sources.filter((_, i) => i !== sourceIndex) }
+    handleChange('subSections', next)
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -204,12 +259,21 @@ function BlogManagementPanel() {
       return
     }
 
+    if (form.type === 'nested' && form.subSections.length === 0) {
+      setFormError('Add at least one sub-section.')
+      return
+    }
+
     setSubmitting(true)
     setFormError('')
 
     try {
       const comparisonJson = form.type === 'comparison'
         ? JSON.stringify({ columns: form.compColumns, rows: form.compRows })
+        : ''
+
+      const subSectionsJson = form.type === 'nested'
+        ? JSON.stringify(form.subSections)
         : ''
 
       const payload: BlogSectionPayload = {
@@ -219,6 +283,7 @@ function BlogManagementPanel() {
         heading: form.heading,
         body: form.body,
         comparison_data: comparisonJson,
+        sub_sections: subSectionsJson || undefined,
         image: imageFile || undefined,
         remove_image: removeExistingImage || undefined,
       }
@@ -257,7 +322,7 @@ function BlogManagementPanel() {
       <div className="product-toolbar">
         <div>
           <h3>Blog Management</h3>
-          <p>Manage blog page sections — description blocks and comparison tables, ordered by display order.</p>
+          <p>Manage blog page sections — description blocks, comparison tables, and nested sub-section groups.</p>
         </div>
         <button className="dashboard-action" type="button" onClick={handleAddClick}>
           Add Section
@@ -280,6 +345,7 @@ function BlogManagementPanel() {
                 <th>Kicker</th>
                 <th>Heading</th>
                 <th>Image</th>
+                <th>Items</th>
                 <th>Created</th>
                 <th>Actions</th>
               </tr>
@@ -296,6 +362,7 @@ function BlogManagementPanel() {
                   <td>{item.kicker || '-'}</td>
                   <td><strong>{item.heading || '(comparison table)'}</strong></td>
                   <td>{item.image_url ? '✓' : '-'}</td>
+                  <td>{item.sub_sections ? `${item.sub_sections.length} subs` : '-'}</td>
                   <td>{item.created_at ? new Date(item.created_at).toLocaleDateString() : '-'}</td>
                   <td>
                     <div className="product-actions">
@@ -328,10 +395,11 @@ function BlogManagementPanel() {
                   <span>Type</span>
                   <select
                     value={form.type}
-                    onChange={(event) => handleChange('type', event.target.value as 'description' | 'comparison')}
+                    onChange={(event) => handleChange('type', event.target.value as 'description' | 'comparison' | 'nested')}
                   >
                     <option value="description">Description</option>
                     <option value="comparison">Comparison Table</option>
+                    <option value="nested">Nested Sub-Sections</option>
                   </select>
                 </label>
 
@@ -406,7 +474,7 @@ function BlogManagementPanel() {
                       ) : null}
                     </div>
                   </>
-                ) : (
+                ) : form.type === 'comparison' ? (
                   <>
                     <label className="portal-field portal-field-full">
                       <span>Heading</span>
@@ -492,6 +560,100 @@ function BlogManagementPanel() {
                         </div>
                       </div>
                     ) : null}
+                  </>
+                ) : (
+                  <>
+                    <label className="portal-field portal-field-full">
+                      <span>Parent Heading</span>
+                      <input
+                        placeholder="e.g. Research Section"
+                        value={form.heading}
+                        onChange={(event) => handleChange('heading', event.target.value)}
+                      />
+                      <small>This is the main heading for the group of sub-sections.</small>
+                    </label>
+
+                    <div className="portal-field portal-field-full">
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                        <span>Sub-Sections</span>
+                        <button type="button" className="portal-btn portal-btn-sm" onClick={addSubSection}>+ Add Sub Section</button>
+                      </div>
+
+                      {form.subSections.length === 0 ? (
+                        <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>No sub-sections yet. Click "Add Sub Section" to begin.</p>
+                      ) : (
+                        form.subSections.map((sub, si) => (
+                          <div key={si} style={{ marginBottom: '1rem', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '0.75rem', background: '#f8fafc' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                              <strong style={{ fontSize: '0.9rem', color: '#334155' }}>Sub-Section #{si + 1}</strong>
+                              <div style={{ display: 'flex', gap: '0.25rem' }}>
+                                <button type="button" className="portal-btn portal-btn-sm" onClick={() => moveSubSection(si, -1)} disabled={si === 0} style={{ padding: '2px 8px' }}>↑</button>
+                                <button type="button" className="portal-btn portal-btn-sm" onClick={() => moveSubSection(si, 1)} disabled={si === form.subSections.length - 1} style={{ padding: '2px 8px' }}>↓</button>
+                                <button type="button" className="portal-btn portal-btn-sm portal-btn-danger" onClick={() => removeSubSection(si)} style={{ padding: '2px 8px' }}>&times;</button>
+                              </div>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                              <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                                Icon/Emoji
+                                <input
+                                  placeholder="🌿"
+                                  value={sub.icon}
+                                  onChange={(event) => handleSubSectionChange(si, 'icon', event.target.value)}
+                                  style={{ fontSize: '1.1rem' }}
+                                />
+                              </label>
+                              <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                                Heading
+                                <input
+                                  placeholder="Healthy Aging"
+                                  value={sub.heading}
+                                  onChange={(event) => handleSubSectionChange(si, 'heading', event.target.value)}
+                                />
+                              </label>
+                            </div>
+
+                            <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '0.5rem' }}>
+                              Description
+                              <textarea
+                                rows={3}
+                                placeholder="Description text for this sub-section..."
+                                value={sub.description}
+                                onChange={(event) => handleSubSectionChange(si, 'description', event.target.value)}
+                              />
+                            </label>
+
+                            <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '0.5rem' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
+                                <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Research Sources</span>
+                                <button type="button" className="portal-btn portal-btn-sm" onClick={() => addSource(si)}>+ Add Source</button>
+                              </div>
+                              {sub.sources.length === 0 ? (
+                                <p style={{ color: '#94a3b8', fontSize: '0.8rem' }}>No sources yet.</p>
+                              ) : (
+                                sub.sources.map((src, si2) => (
+                                  <div key={si2} style={{ display: 'flex', gap: '0.25rem', alignItems: 'center', marginBottom: '0.3rem' }}>
+                                    <input
+                                      style={{ width: '140px', fontSize: '0.8rem' }}
+                                      placeholder="Source title"
+                                      value={src.title}
+                                      onChange={(event) => handleSourceChange(si, si2, 'title', event.target.value)}
+                                    />
+                                    <input
+                                      style={{ flex: 1, fontSize: '0.8rem' }}
+                                      placeholder="https://..."
+                                      value={src.url}
+                                      onChange={(event) => handleSourceChange(si, si2, 'url', event.target.value)}
+                                    />
+                                    <button type="button" className="portal-btn portal-btn-sm portal-btn-danger" onClick={() => removeSource(si, si2)} style={{ padding: '2px 8px', fontSize: '0.75rem' }}>&times;</button>
+                                  </div>
+                                ))
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
                   </>
                 )}
               </div>

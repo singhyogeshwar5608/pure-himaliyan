@@ -45,15 +45,15 @@ function BlogPage() {
       <SEO title="Blog" description="Read about the benefits, usage, and science behind Pure Himalyan Shilajit — your guide to natural wellness and vitality." canonical="https://purehimalyan.com/blog" />
       <Header />
 
-      <section className="gallery-collection gallery-page-content product-detail-page" style={{ paddingTop: '7rem' }}>
+      <section className="gallery-collection gallery-page-content product-detail-page blog-page-layout">
         <div className="container">
-          <div style={{ marginBottom: '1.5rem' }}>
-            <Link to="/" style={{ color: '#8b4513', textDecoration: 'none', fontWeight: 600 }}>Home</Link>
-            <span style={{ color: '#64748b', margin: '0 0.5rem' }}>/</span>
-            <strong style={{ color: '#111827' }}>Blog</strong>
+          <div className="blog-breadcrumb">
+            <Link to="/" className="blog-breadcrumb-link">Home</Link>
+            <span className="blog-breadcrumb-sep">/</span>
+            <strong className="blog-breadcrumb-current">Blog</strong>
           </div>
 
-          <div className="product-detail-lower-section">
+          <div className="blog-sections">
             {loading ? (
               <p className="section-subtext">Loading...</p>
             ) : sortedContent.length === 0 ? (
@@ -63,11 +63,11 @@ function BlogPage() {
                 if (item.type === 'description') {
                   const points = parseBodyPoints(item.body || '')
                   return (
-                    <div key={item.id} className="product-detail-description-card">
-                      {item.kicker ? <p className="section-kicker">{item.kicker}</p> : null}
-                      {item.heading ? <h2>{item.heading}</h2> : null}
+                    <div key={item.id} className="product-detail-description-card blog-card">
+                      {item.kicker ? <p className="section-kicker blog-kicker">{item.kicker}</p> : null}
+                      {item.heading ? <h2 className="blog-heading">{item.heading}</h2> : null}
                       <div className="product-detail-description-split">
-                        <ul className="product-detail-description product-detail-description-large product-detail-description-list">
+                        <ul className="product-detail-description product-detail-description-large product-detail-description-list blog-description-list">
                           {points.map((point, idx) => (
                             <li key={`${point.html}-${idx}`} className={point.isHeading ? 'product-detail-description-heading' : ''}>
                               <span dangerouslySetInnerHTML={{ __html: point.html }} />
@@ -97,10 +97,10 @@ function BlogPage() {
 
                   if (parsed.columns && parsed.columns.length > 0 && parsed.rows && parsed.rows.length > 0) {
                     return (
-                      <div key={item.id} className="product-detail-description-card">
-                        {item.kicker ? <p className="section-kicker">{item.kicker}</p> : null}
-                        {item.heading ? <h2>{item.heading}</h2> : null}
-                        <div className="product-detail-comparison" style={{ margin: '0' }}>
+                      <div key={item.id} className="product-detail-description-card blog-card">
+                        {item.kicker ? <p className="section-kicker blog-kicker">{item.kicker}</p> : null}
+                        {item.heading ? <h2 className="blog-heading">{item.heading}</h2> : null}
+                        <div className="product-detail-comparison blog-comparison">
                           <div style={{ overflowX: 'auto' }}>
                             <table className="comparison-table">
                               <thead>
@@ -126,6 +126,44 @@ function BlogPage() {
                       </div>
                     )
                   }
+                }
+
+                if (item.type === 'nested' && Array.isArray(item.sub_sections) && item.sub_sections.length > 0) {
+                  return (
+                    <div key={item.id} className="product-detail-description-card blog-card blog-nested-card">
+                      {item.kicker ? <p className="section-kicker blog-kicker">{item.kicker}</p> : null}
+                      {item.heading ? <h2 className="blog-heading">{item.heading}</h2> : null}
+                      <div className="blog-nested-items">
+                        {item.sub_sections.map((sub, idx) => (
+                          <div key={idx} className="blog-nested-item">
+                            <div className="blog-nested-item-header">
+                              {sub.icon ? <span className="blog-nested-icon">{sub.icon}</span> : null}
+                              {sub.heading ? <h3 className="blog-nested-item-heading">{sub.heading}</h3> : null}
+                            </div>
+                            {sub.description ? (
+                              <p className="blog-nested-description">{sub.description}</p>
+                            ) : null}
+                            {sub.sources && sub.sources.length > 0 ? (
+                              <div className="blog-nested-sources">
+                                <span className="blog-nested-sources-label">Research Sources</span>
+                                <ol className="blog-nested-sources-list">
+                                  {sub.sources.map((src, si) => (
+                                    <li key={si}>
+                                      {src.url ? (
+                                        <a href={src.url} target="_blank" rel="noopener noreferrer">{src.title || src.url}</a>
+                                      ) : (
+                                        src.title
+                                      )}
+                                    </li>
+                                  ))}
+                                </ol>
+                              </div>
+                            ) : null}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
                 }
 
                 return null

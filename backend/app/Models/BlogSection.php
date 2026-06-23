@@ -19,9 +19,11 @@ class BlogSection extends Model
         'body',
         'image_url',
         'comparison_data',
+        'sub_sections',
     ];
 
     protected $casts = [
         'display_order' => 'integer',
+        'sub_sections' => 'array',
     ];
 }
