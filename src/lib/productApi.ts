@@ -1165,6 +1165,7 @@ export type SubSectionItem = {
   icon: string
   heading: string
   description: string
+  image_url?: string
   sources: SubSectionSource[]
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import '../App.css'
 import { SEO } from '../components/SEO'
 import Header from '../components/Header'
@@ -28,6 +28,16 @@ const emptyInquiryForm = {
 
 function HomePage() {
   const { t } = useTranslation()
+  const location = useLocation()
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.slice(1)
+      const el = document.getElementById(id)
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
+      }
+    }
+  }, [location.hash])
   const [currentSlide, setCurrentSlide] = useState(0)
   const [galleryStartIndex, setGalleryStartIndex] = useState(0)
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth)

@@ -59,6 +59,7 @@ function ProductModal({ initialProduct, isOpen, isSubmitting, title, onClose, on
   const [descError, setDescError] = useState('')
   const [compColumns, setCompColumns] = useState<string[]>(['Feature', 'Product'])
   const [compRows, setCompRows] = useState<{ label: string; values: string[] }[]>([])
+  const [compBlogSectionId, setCompBlogSectionId] = useState('')
 
   useEffect(() => {
     if (!initialProduct) {
@@ -74,16 +75,20 @@ function ProductModal({ initialProduct, isOpen, isSubmitting, title, onClose, on
     let parsedCols = ['Feature', 'Product']
     let parsedRows: { label: string; values: string[] }[] = []
 
+    let parsedBlogSectionId = ''
+
     if (initialProduct.comparison_data) {
       try {
         const parsed = JSON.parse(initialProduct.comparison_data)
         if (Array.isArray(parsed.columns)) parsedCols = parsed.columns
         if (Array.isArray(parsed.rows)) parsedRows = parsed.rows
+        if (parsed.blog_section_id) parsedBlogSectionId = String(parsed.blog_section_id)
       } catch { /* ignore invalid JSON */ }
     }
 
     setCompColumns(parsedCols)
     setCompRows(parsedRows)
+    setCompBlogSectionId(parsedBlogSectionId)
 
     setForm({
       name: initialProduct.name,
@@ -209,7 +214,7 @@ function ProductModal({ initialProduct, isOpen, isSubmitting, title, onClose, on
     setError('')
 
     try {
-      const comparisonJson = JSON.stringify({ columns: compColumns, rows: compRows })
+      const comparisonJson = JSON.stringify({ columns: compColumns, rows: compRows, blog_section_id: compBlogSectionId ? Number(compBlogSectionId) : undefined })
       const payload = { ...form, comparison_data: comparisonJson }
       await onSubmit(payload)
     } catch (requestError) {
@@ -393,6 +398,19 @@ function ProductModal({ initialProduct, isOpen, isSubmitting, title, onClose, on
                 style={{ width: '120px' }}
               />
               <small>Is order mein description sections ke beech mein table dikhega.</small>
+            </label>
+
+            <label className="portal-field" style={{ marginBottom: '0.75rem' }}>
+              <span>Blog Section ID</span>
+              <input
+                type="number"
+                min="0"
+                placeholder="e.g. 5"
+                value={compBlogSectionId}
+                onChange={(e) => setCompBlogSectionId(e.target.value)}
+                style={{ width: '120px' }}
+              />
+              <small>Blog section ID jahan "Read on Blog" link lega jayega.</small>
             </label>
 
             <div className="portal-field" style={{ marginBottom: '0.75rem' }}>

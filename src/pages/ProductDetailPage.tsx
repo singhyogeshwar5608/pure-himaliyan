@@ -240,13 +240,18 @@ function ProductDetailPage() {
       isHeading: /^##\s*/.test(item),
     }))
 
+  const blogLinkRe = /\[blog\s*:\s*(\d+)\]/gi
+
   const parseBodyPoints = (body: string) =>
     body
       .split(/\r?\n|•|\u2022|\|/)
       .map((item) => item.trim())
       .filter(Boolean)
       .map((item) => ({
-        html: item.replace(/^##\s*/, '').trim(),
+        html: item
+          .replace(/^##\s*/, '')
+          .replace(blogLinkRe, '<a href="/blog#blog-section-$1" class="blog-link-btn blog-link-inline">📖 Read on Blog</a>')
+          .trim(),
         isHeading: /^##\s*/.test(item),
       }))
 
@@ -647,7 +652,7 @@ function ProductDetailPage() {
 
                     if (section.type === 'comparison') {
                       const { comparison_data } = section.data as { comparison_data: string }
-                      let parsed: { columns?: string[]; rows?: { label: string; values: string[] }[] } = {}
+                      let parsed: { columns?: string[]; rows?: { label: string; values: string[] }[]; blog_section_id?: number } = {}
                       try {
                         parsed = JSON.parse(comparison_data)
                       } catch { /* ignore */ }
@@ -676,6 +681,9 @@ function ProductDetailPage() {
                                 </tbody>
                               </table>
                             </div>
+                            {parsed.blog_section_id ? (
+                              <Link to={`/blog#blog-section-${parsed.blog_section_id}`} className="blog-link-btn" style={{ marginTop: '0.75rem' }}>📖 Read on Blog</Link>
+                            ) : null}
                           </div>
                         )
                       }

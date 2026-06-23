@@ -29,33 +29,33 @@ body {
 
 /* Home only: less vertical space between hero, highlights, products, gallery, contact, footer */
 .home-page .footer-highlight-section {
-  padding: 1.35rem 0 0.85rem;
+  padding: 0.75rem 0 0.5rem;
 }
 
 .home-page .footer-highlight-heading {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.25rem;
 }
 
 .home-page .products-section,
 .home-page .gallery-section,
 .home-page .contact-section {
-  padding: 2.25rem 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 .home-page .products-section {
-  padding-bottom: 1.35rem;
+  padding-bottom: 0.5rem;
 }
 
 .home-page .gallery-section {
-  padding-top: 1.35rem;
+  padding-top: 0.5rem;
 }
 
 .home-page .section-title {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.3rem;
 }
 
 .home-page .section-subtext {
-  margin-bottom: 1.35rem;
+  margin-bottom: 0.75rem;
 }
 
 .home-page .home-media-gallery {
@@ -71,11 +71,11 @@ body {
 }
 
 .home-page .site-footer {
-  padding: 2rem 1.5rem 1.15rem;
+  padding: 1rem 1.5rem 0.75rem;
 }
 
 .home-page .footer-bottom {
-  margin-top: 1.35rem;
+  margin-top: 0.75rem;
 }
 
 .container {
@@ -313,7 +313,7 @@ body {
 
 .hero-description {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .cta-button,
@@ -398,7 +398,7 @@ body {
 .nutrients-section,
 .testimonials-section,
 .contact-section {
-  padding: 5rem 2rem;
+  padding: 1.5rem 2rem;
 }
 
 .problem-section {
@@ -412,11 +412,11 @@ body {
 }
 
 .products-section {
-  padding-bottom: 2.5rem;
+  padding-bottom: 1rem;
 }
 
 .gallery-section {
-  padding-top: 2.5rem;
+  padding-top: 1rem;
 }
 
 .media-gallery {
@@ -525,8 +525,8 @@ body {
 .nutrients-section {
   background: #1a1a1a;
   color: #fff;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .testimonials-section {
@@ -542,13 +542,13 @@ body {
 
 .section-title {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .section-main-title {
   font-size: 3.5rem;
   color: #d4af37;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .section-intro,
@@ -557,8 +557,8 @@ body {
 .nutrients-subtitle {
   text-align: center;
   max-width: 900px;
-  margin: 0 auto 3rem;
-  line-height: 1.8;
+  margin: 0 auto 0.75rem;
+  line-height: 1.6;
   color: #555;
 }
 
@@ -576,7 +576,7 @@ body {
 .footer-grid,
 .contact-content {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .problem-grid {
@@ -604,15 +604,15 @@ body {
 }
 
 .gallery-page-content {
-  padding-top: 7rem;
+  padding-top: 3.5rem;
 }
 
 .home-gallery-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -693,7 +693,7 @@ body {
 .gallery-page-media-grid {
   grid-template-columns: repeat(auto-fit, 380px);
   justify-content: center;
-  gap: 1.5rem;
+  gap: 0.75rem;
 }
 
 .gallery-page-media-card {
@@ -710,7 +710,7 @@ body {
 }
 
 .products-page-shell .gallery-page-content {
-  padding-top: 7.6rem;
+  padding-top: 3.5rem;
 }
 
 .product-detail-page-shell {
@@ -718,8 +718,8 @@ body {
 }
 
 .product-detail-breadcrumb-wrap {
-  padding-top: 6.4rem;
-  padding-bottom: 1.25rem;
+  padding-top: 3.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .product-detail-breadcrumb {
@@ -742,21 +742,21 @@ body {
 }
 
 .product-detail-page-shell .gallery-collection.product-detail-page {
-  padding-top: 2.75rem;
+  padding-top: 0.5rem;
 }
 
 .product-detail-page-shell .nutrients-section {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-detail-page {
-  padding-bottom: 5rem;
+  padding-bottom: 1rem;
 }
 
 .product-detail-extra-insights {
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-detail-extra-insights .container {
@@ -784,19 +784,19 @@ body {
 .product-detail-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.95fr);
-  gap: 1.75rem;
+  gap: 0.75rem;
   align-items: start;
   width: 100%;
   min-width: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-detail-gallery,
 .product-detail-info {
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-  padding: 1.25rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  padding: 0.5rem;
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
@@ -1139,7 +1139,7 @@ body {
 }
 
 .product-detail-comparison {
-  margin: 2rem 0;
+  margin: 0.5rem 0;
 }
 
 .product-detail-comparison h2 {
@@ -1156,14 +1156,14 @@ body {
 }
 
 .product-detail-tags {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-detail-highlights {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .product-detail-highlights div {
@@ -1195,10 +1195,10 @@ body {
 }
 
 .product-detail-lower-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
   width: 100%;
 }
 
@@ -1226,9 +1226,9 @@ body {
   width: 100%;
   max-width: 100%;
   background: #ffffff;
-  border-radius: 22px;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
-  padding: 2rem 2.25rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  padding: 0.75rem 1rem;
   box-sizing: border-box;
 }
 
@@ -1303,7 +1303,7 @@ body {
 
 .product-detail-empty {
   text-align: center;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
 }
 
 @media (max-width: 1024px) {
@@ -1345,7 +1345,7 @@ body {
 
 @media (max-width: 768px) {
   .legal-hero {
-    padding: 7.2rem 0 3.6rem;
+    padding: 3.5rem 0 2rem;
   }
 
   .legal-hero-content {
@@ -1363,24 +1363,24 @@ body {
   }
 
   .legal-overview {
-    padding: 3rem 0;
+    padding: 1.5rem 0;
   }
 
   .legal-section-block {
-    padding: 1.8rem;
+    padding: 1rem;
   }
 
   .legal-support {
-    padding: 3rem 0 3.8rem;
+    padding: 1.5rem 0 2rem;
   }
 
   .product-detail-breadcrumb-wrap {
-    padding-top: 5.4rem;
-    padding-bottom: 1rem;
+    padding-top: 3.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .product-detail-page-shell .gallery-collection.product-detail-page {
-    padding-top: 2.1rem;
+    padding-top: 0.5rem;
   }
 
   .product-detail-layout {
@@ -1431,12 +1431,12 @@ body {
   }
 
   .problem-section {
-    padding: 3rem 0;
+    padding: 1.5rem 0;
   }
 
   .problem-layout {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 0.75rem;
   }
 
   .cause-content,
@@ -1449,7 +1449,7 @@ body {
   }
 
   .product-detail-extra-insights {
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 }
 
@@ -1525,21 +1525,21 @@ body {
 
 /* Review Section */
 .product-reviews-section {
-  padding: 4rem 0;
+  padding: 1rem 0;
   background: #f8fafc;
-  border-radius: 32px;
-  margin: 2rem 0;
+  border-radius: 24px;
+  margin: 0.5rem 0;
 }
 
 .reviews-layout {
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
 
 .reviews-list-column h3,
 .review-form-column h3 {
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
   font-size: 1.75rem;
   font-weight: 800;
   color: #1e293b;
@@ -1547,7 +1547,7 @@ body {
 
 .reviews-list {
   display: grid;
-  gap: 1.5rem;
+  gap: 0.75rem;
 }
 
 .review-card {
@@ -1589,15 +1589,15 @@ body {
 /* Review Summary Box */
 .review-summary-box {
   background: #ffffff;
-  padding: 1.5rem;
+  padding: 1.25rem;
   border-radius: 16px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   border: 1px solid #f1f5f9;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .review-summary-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .average-rating-display {
@@ -1795,7 +1795,7 @@ body {
   }
 
   .product-detail-extra-insights {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
   }
 
   .extra-insights-grid {
@@ -1812,11 +1812,11 @@ body {
   }
 
   .product-detail-page-shell .gallery-collection.product-detail-page {
-    padding-top: 1.6rem;
+    padding-top: 0.5rem;
   }
 
   .product-detail-breadcrumb-wrap {
-    padding-top: 5rem;
+    padding-top: 3.5rem;
   }
 
   .product-detail-info {
@@ -1953,7 +1953,7 @@ body {
 .problem-header {
   text-align: center;
   max-width: 900px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 1.5rem;
 }
 
 .problem-header .section-title {
@@ -1967,8 +1967,8 @@ body {
 
 .problem-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   align-items: stretch;
 }
 
@@ -2111,14 +2111,14 @@ body {
 }
 
 .footer-highlight-section {
-  padding: 2.5rem 0 1.75rem;
+  padding: 0.75rem 0 0.5rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff7ed 60%, #fff 100%);
   overflow: hidden;
 }
 
 .footer-highlight-heading {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   color: #8b4513;
 }
 
@@ -2348,7 +2348,7 @@ body {
 .section-actions {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .gallery-view-all,
@@ -2401,7 +2401,7 @@ body {
 }
 
 .gallery-hero {
-  padding: 6rem 2rem 4rem;
+  padding: 2rem 2rem 1.5rem;
   background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.2), transparent 55%),
     radial-gradient(circle at top right, rgba(139, 69, 19, 0.15), transparent 60%), #fff9f2;
 }
@@ -2409,7 +2409,7 @@ body {
 .gallery-hero .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
@@ -2434,7 +2434,7 @@ body {
 }
 
 .gallery-hero-actions {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -2474,14 +2474,14 @@ body {
 }
 
 .gallery-collection {
-  padding: 5rem 2rem;
+  padding: 1.5rem 2rem;
 }
 
 .gallery-collection-header {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .gallery-collection-header h2 {
@@ -2524,7 +2524,7 @@ body {
 
 .gallery-masonry-card {
   break-inside: avoid;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
@@ -2566,14 +2566,14 @@ body {
 }
 
 .gallery-cta {
-  padding: 5rem 2rem 6rem;
+  padding: 1.5rem 2rem 2rem;
 }
 
 .gallery-cta-card {
   background: linear-gradient(135deg, #603813, #b37c2c);
   color: #fff4e5;
   border-radius: 30px;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -2780,8 +2780,8 @@ body {
 
 .cta-section {
   text-align: center;
-  padding: 3rem;
-  margin-top: 3rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
 }
 
 .contact-form-grid {
@@ -2855,9 +2855,9 @@ body {
 }
 
 .site-footer {
-  background: #111827;
+  background: #000;
   color: #fff;
-  padding: 3rem 2rem 1.5rem;
+  padding: 1rem 2rem 0.75rem;
 }
 
 .site-footer h4 {
@@ -2889,8 +2889,8 @@ body {
 
 .footer-bottom {
   text-align: center;
-  margin-top: 2rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -3660,15 +3660,15 @@ body {
 /* Tighter gap under fixed navbar (overrides gallery / products shell padding) */
 .products-page-shell.user-dashboard-shell .gallery-page-content.user-dashboard-page,
 .user-dashboard-shell .gallery-page-content.user-dashboard-page {
-  padding-top: 4.85rem;
-  padding-bottom: 2.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 2rem;
 }
 
 @media (max-width: 640px) {
   .products-page-shell.user-dashboard-shell .gallery-page-content.user-dashboard-page,
   .user-dashboard-shell .gallery-page-content.user-dashboard-page {
-    padding-top: 4.35rem;
-    padding-bottom: 1.75rem;
+    padding-top: 3.5rem;
+    padding-bottom: 1.5rem;
   }
 }
 
@@ -3770,7 +3770,7 @@ body {
 .user-dashboard-layout {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
-  gap: 2rem;
+  gap: 1rem;
   position: relative;
 }
 
@@ -4317,7 +4317,7 @@ body {
 }
 
 .legal-hero {
-  padding: 8.5rem 0 4.5rem;
+  padding: 3.5rem 0 2rem;
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(8, 47, 73, 0.82)), url('/assets/banner/footer_d.jpeg') center/cover;
   position: relative;
   overflow: hidden;
@@ -4436,7 +4436,7 @@ body {
 }
 
 .legal-overview {
-  padding: 3.5rem 0;
+  padding: 2rem 0;
   background: linear-gradient(180deg, #fffdf7 0%, rgba(255, 255, 255, 0.65) 100%);
 }
 
@@ -4469,13 +4469,13 @@ body {
 }
 
 .legal-body {
-  padding: 4rem 0 3.5rem;
+  padding: 2.5rem 0 2rem;
 }
 
 .legal-layout {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.65fr);
-  gap: 2.5rem;
+  gap: 1rem;
   align-items: start;
 }
 
@@ -4542,7 +4542,7 @@ body {
 
 .legal-section-stack {
   display: grid;
-  gap: 2.5rem;
+  gap: 1rem;
 }
 
 .legal-section-block {
@@ -4595,7 +4595,7 @@ body {
 }
 
 .legal-support {
-  padding: 3.5rem 0 4.5rem;
+  padding: 2rem 0 2.5rem;
   background: linear-gradient(180deg, #020617 0%, #0f172a 45%, #111827 100%);
 }
 
@@ -4652,11 +4652,11 @@ body {
 }
 
 .legal-footer {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .legal-footer .footer-bottom {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 .legal-page .nav-menu.legal-nav .nav-link {
@@ -4738,7 +4738,7 @@ body {
   }
 
   .product-detail-page {
-    padding-bottom: 3.25rem;
+    padding-bottom: 2rem;
   }
 
   .hero-subtitle {
@@ -5060,26 +5060,26 @@ body {
   }
 
   .gallery-page-content {
-    padding-top: 6.25rem;
+    padding-top: 3.5rem;
   }
 
   .products-page-shell .gallery-page-content {
-    padding-top: 6.9rem;
+    padding-top: 3.5rem;
   }
 
   .product-detail-breadcrumb-wrap {
-    padding-top: 6.8rem;
-    padding-bottom: 1.35rem;
+    padding-top: 3.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .product-detail-layout {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   .product-detail-lower-section {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   .order-modal-grid {
@@ -5232,16 +5232,16 @@ body {
   .section-subtext,
   .section-intro {
     font-size: 0.95rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .product-detail-page {
-    padding-bottom: 3.25rem;
+    padding-bottom: 1rem;
   }
 
   .product-detail-breadcrumb-wrap {
-    padding-top: 6.1rem;
-    padding-bottom: 1.15rem;
+    padding-top: 3.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .product-detail-breadcrumb {
@@ -5427,21 +5427,22 @@ body {
   }
 
   .site-footer {
-    padding: 2.5rem 1.25rem 1rem;
+    padding: 1rem 1.25rem 0.75rem;
   }
 }
 
 /* ===== Blog Page Compact Layout ===== */
 .blog-page-layout {
-  padding-top: 6rem !important;
+  padding-top: 3.5rem !important;
 }
 
 .blog-page-layout .container {
-  max-width: 820px;
+  max-width: 100%;
+  padding: 0 2rem;
 }
 
 .blog-breadcrumb {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .blog-breadcrumb-link {
@@ -5464,11 +5465,12 @@ body {
 .blog-sections {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .blog-card {
-  padding: 1.25rem 1.5rem !important;
+  padding: 0.75rem 1rem !important;
+  scroll-margin-top: 4rem;
 }
 
 .blog-card .section-kicker.blog-kicker {
@@ -5506,7 +5508,10 @@ body {
 
 .blog-nested-item {
   padding: 0.85rem 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #000;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
 
 .blog-nested-item:last-child {
@@ -5516,6 +5521,11 @@ body {
 
 .blog-nested-item:first-child {
   padding-top: 0;
+}
+
+.blog-nested-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .blog-nested-item-header {
@@ -5586,13 +5596,53 @@ body {
   flex-shrink: 0;
 }
 
+.blog-nested-image {
+  width: 160px;
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.blog-link-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: #16a34a;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.blog-link-btn:hover {
+  background: #15803d;
+}
+
+.blog-link-inline {
+  margin-top: 0;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  .blog-nested-item {
+    flex-direction: column;
+  }
+  .blog-nested-image {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
 @media (max-width: 768px) {
   .blog-page-layout {
-    padding-top: 5rem !important;
+    padding-top: 3.5rem !important;
   }
 
   .blog-card {
-    padding: 1rem 1.15rem !important;
+    padding: 0.75rem 1rem !important;
   }
 
   .blog-nested-item {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Leaf } from 'lucide-react'
 import '../App.css'
 import Header from '../components/Header'
@@ -8,13 +8,18 @@ import { SEO } from '../components/SEO'
 import { fetchBlogSections, buildApiUrl } from '../lib/productApi'
 import type { BlogSectionRecord } from '../lib/productApi'
 
+const blogLinkRe = /\[blog\s*:\s*(\d+)\]/gi
+
 const parseBodyPoints = (body: string) =>
   body
     .split(/\r?\n|•|\u2022/)
     .map((item) => item.trim())
     .filter(Boolean)
     .map((item) => ({
-      html: item.replace(/^##\s*/, '').trim(),
+      html: item
+        .replace(/^##\s*/, '')
+        .replace(blogLinkRe, '<a href="/blog#blog-section-$1" class="blog-link-btn blog-link-inline">📖 Read on Blog</a>')
+        .trim(),
       isHeading: /^##\s*/.test(item),
     }))
 
@@ -58,6 +63,23 @@ function BlogPage() {
     void load()
   }, [])
 
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!loading && location.hash) {
+      const id = location.hash.slice(1)
+      const tryScroll = (retries = 5) => {
+        const el = document.getElementById(id)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        } else if (retries > 0) {
+          setTimeout(() => tryScroll(retries - 1), 200)
+        }
+      }
+      tryScroll()
+    }
+  }, [loading, location.hash])
+
   const sortedContent = useMemo(
     () => [...sections].sort((a, b) => a.display_order - b.display_order),
     [sections],
@@ -86,7 +108,7 @@ function BlogPage() {
                 if (item.type === 'description') {
                   const points = parseBodyPoints(item.body || '')
                   return (
-                    <div key={item.id} className="product-detail-description-card blog-card">
+                    <div key={item.id} id={`blog-section-${item.id}`} className="product-detail-description-card blog-card">
                       {item.kicker ? <p className="section-kicker blog-kicker">{item.kicker}</p> : null}
                       {item.heading ? <h2 className="blog-heading">{item.heading}</h2> : null}
                       <div className="product-detail-description-split">
@@ -120,7 +142,7 @@ function BlogPage() {
 
                   if (parsed.columns && parsed.columns.length > 0 && parsed.rows && parsed.rows.length > 0) {
                     return (
-                      <div key={item.id} className="product-detail-description-card blog-card">
+                      <div key={item.id} id={`blog-section-${item.id}`} className="product-detail-description-card blog-card">
                         {item.kicker ? <p className="section-kicker blog-kicker">{item.kicker}</p> : null}
                         {item.heading ? <h2 className="blog-heading">{item.heading}</h2> : null}
                         <div className="product-detail-comparison blog-comparison">
@@ -153,19 +175,20 @@ function BlogPage() {
 
                 if (item.type === 'nested' && Array.isArray(item.sub_sections) && item.sub_sections.length > 0) {
                   return (
-                    <div key={item.id} className="product-detail-description-card blog-card blog-nested-card">
+                    <div key={item.id} id={`blog-section-${item.id}`} className="product-detail-description-card blog-card blog-nested-card">
                       {item.kicker ? <p className="section-kicker blog-kicker">{item.kicker}</p> : null}
                       {item.heading ? <h2 className="blog-heading">{item.heading}</h2> : null}
                       <div className="blog-nested-items">
                         {item.sub_sections.map((sub, idx) => (
                           <div key={idx} className="blog-nested-item">
-                            <div className="blog-nested-item-header">
-                              {renderSubIcon(sub.icon, item.kicker)}
-                              {sub.heading ? <h3 className="blog-nested-item-heading">{sub.heading}</h3> : null}
-                            </div>
-                            {sub.description ? (
-                              <p className="blog-nested-description">{sub.description}</p>
-                            ) : null}
+                            <div className="blog-nested-content">
+                              <div className="blog-nested-item-header">
+                                {renderSubIcon(sub.icon, item.kicker)}
+                                {sub.heading ? <h3 className="blog-nested-item-heading">{sub.heading}</h3> : null}
+                              </div>
+                              {sub.description ? (
+                                <p className="blog-nested-description">{sub.description}</p>
+                              ) : null}
                             {sub.sources && sub.sources.length > 0 ? (
                               <div className="blog-nested-sources">
                                 <span className="blog-nested-sources-label">Research Sources</span>
@@ -181,6 +204,10 @@ function BlogPage() {
                                   ))}
                                 </ol>
                               </div>
+                            ) : null}
+                          </div>
+                            {sub.image_url ? (
+                              <img src={sub.image_url} alt={sub.heading || ''} className="blog-nested-image" />
                             ) : null}
                           </div>
                         ))}

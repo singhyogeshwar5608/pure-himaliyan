@@ -59,7 +59,7 @@ function Header() {
             </Link>
           </li>
           <li>
-            <a href="#contact" className="nav-link" onClick={closeMobileMenu}>{t('nav.contact')}</a>
+            <Link to="/#contact" className="nav-link" onClick={closeMobileMenu}>{t('nav.contact')}</Link>
           </li>
           <li>
             {sessionUser ? (

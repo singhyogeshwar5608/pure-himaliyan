@@ -19,6 +19,7 @@ const emptySubSection: SubSectionItem = {
   icon: '',
   heading: '',
   description: '',
+  image_url: '',
   sources: [],
 }
 
@@ -340,6 +341,7 @@ function BlogManagementPanel() {
           <table className="product-table">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Order</th>
                 <th>Type</th>
                 <th>Kicker</th>
@@ -353,6 +355,7 @@ function BlogManagementPanel() {
             <tbody>
               {sortedSections.map((item) => (
                 <tr key={item.id}>
+                  <td style={{ fontWeight: 600, color: '#2563eb' }}>{item.id}</td>
                   <td>{item.display_order}</td>
                   <td>
                     <span style={{ textTransform: 'capitalize', fontWeight: 600 }}>
@@ -594,25 +597,16 @@ function BlogManagementPanel() {
                             </div>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                              <div style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                                <span>Icon</span>
+                              <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', cursor: 'pointer' }}>
                                 <input
-                                  placeholder="🌿 or other emoji"
-                                  value={sub.icon === 'leaf' ? '' : sub.icon}
-                                  onChange={(event) => handleSubSectionChange(si, 'icon', event.target.value)}
-                                  disabled={sub.icon === 'leaf'}
-                                  style={{ fontSize: '1.1rem' }}
+                                  type="checkbox"
+                                  checked={sub.icon === 'leaf'}
+                                  onChange={(event) => handleSubSectionChange(si, 'icon', event.target.checked ? 'leaf' : '')}
+                                  style={{ margin: 0, width: '16px', height: '16px' }}
                                 />
-                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.15rem', cursor: 'pointer' }}>
-                                  <input
-                                    type="checkbox"
-                                    checked={sub.icon === 'leaf'}
-                                    onChange={(event) => handleSubSectionChange(si, 'icon', event.target.checked ? 'leaf' : '')}
-                                  />
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-                                  <span style={{ color: '#16a34a', fontSize: '0.78rem' }}>Leaf icon</span>
-                                </label>
-                              </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block' }}><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                                <span style={{ color: '#16a34a' }}>Leaf icon</span>
+                              </label>
                               <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                                 Heading
                                 <input
@@ -632,6 +626,31 @@ function BlogManagementPanel() {
                                 onChange={(event) => handleSubSectionChange(si, 'description', event.target.value)}
                               />
                             </label>
+
+                            <div style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '0.5rem' }}>
+                              <span>Image</span>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(event) => {
+                                  const file = event.target.files?.[0]
+                                  if (file) {
+                                    const reader = new FileReader()
+                                    reader.onload = (loadEvent) => {
+                                      const dataUrl = loadEvent.target?.result as string
+                                      handleSubSectionChange(si, 'image_url', dataUrl)
+                                    }
+                                    reader.readAsDataURL(file)
+                                  }
+                                }}
+                              />
+                              {sub.image_url ? (
+                                <div style={{ marginTop: '0.3rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                  <img src={sub.image_url} alt="" style={{ maxWidth: '120px', maxHeight: '90px', borderRadius: '6px', border: '1px solid #e2e8f0' }} />
+                                  <button type="button" className="portal-btn portal-btn-sm portal-btn-danger" onClick={() => handleSubSectionChange(si, 'image_url', '')} style={{ padding: '2px 8px', fontSize: '0.75rem' }}>Remove</button>
+                                </div>
+                              ) : null}
+                            </div>
 
                             <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '0.5rem' }}>
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
