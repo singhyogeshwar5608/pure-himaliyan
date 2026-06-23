@@ -594,15 +594,24 @@ function BlogManagementPanel() {
                             </div>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                              <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                                Icon
+                              <div style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                                <span>Icon</span>
                                 <input
-                                  placeholder="Type emoji or 'leaf'"
-                                  value={sub.icon}
+                                  placeholder="🌿 or other emoji"
+                                  value={sub.icon === 'leaf' ? '' : sub.icon}
                                   onChange={(event) => handleSubSectionChange(si, 'icon', event.target.value)}
+                                  disabled={sub.icon === 'leaf'}
                                   style={{ fontSize: '1.1rem' }}
                                 />
-                              </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.15rem', cursor: 'pointer' }}>
+                                  <input
+                                    type="checkbox"
+                                    checked={sub.icon === 'leaf'}
+                                    onChange={(event) => handleSubSectionChange(si, 'icon', event.target.checked ? 'leaf' : '')}
+                                  />
+                                  <span style={{ color: '#16a34a', fontSize: '0.78rem' }}>Leaf icon</span>
+                                </label>
+                              </div>
                               <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                                 Heading
                                 <input
