@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '../AdminPortal.css'
+import { SEO } from '../components/SEO'
 import ProductAdsPanel from '../components/ProductAdsPanel'
 import {
   fetchAffiliateProductDiscounts,
@@ -199,6 +200,7 @@ function AffiliateDashboardPage() {
 
   return (
     <div className="dashboard-layout">
+      <SEO title="Affiliate Dashboard" description="Manage your Pure Himalyan affiliate account, referrals, commissions, and product links." noIndex />
       <div className="dashboard-topbar">
         <span className="dashboard-topbar-brand">Affiliate Panel</span>
         <button className="dashboard-menu-button" type="button" aria-label="Toggle menu" onClick={toggleSidebar}>

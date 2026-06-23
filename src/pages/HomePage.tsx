@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import '../App.css'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import MediaGallery from '../components/MediaGallery'
@@ -306,6 +307,7 @@ function HomePage() {
 
   return (
     <main className="site-shell home-page">
+      <SEO title="Premium Himalayan Shilajit Resin" description="Discover Pure Himalyan Shilajit – lab-tested, high potency Himalayan resin crafted for energy, stamina, immunity, and holistic wellness." canonical="https://purehimalyan.com/" ogImage="https://purehimalyan.com/assets/logo/brand%20png.webp" />
       <Header />
 
       <section id="home" className="hero-section">

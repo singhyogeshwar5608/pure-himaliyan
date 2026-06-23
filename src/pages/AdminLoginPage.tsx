@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../AdminPortal.css'
+import { SEO } from '../components/SEO'
 import { saveAdminUser } from '../lib/adminAuth'
 import { buildApiUrl } from '../lib/productApi'
 
@@ -54,6 +55,7 @@ function AdminLoginPage() {
 
   return (
     <div className="portal-shell">
+      <SEO title="Admin Login" description="Admin portal login for Pure Himalyan — manage products, orders, reviews, and store settings." noIndex />
       <div className="portal-card">
         <h1>Admin Login</h1>
 

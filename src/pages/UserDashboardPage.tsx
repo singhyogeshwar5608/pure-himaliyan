@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../App.css'
 import { fetchUserDashboard, resolveProductImageUrl } from '../lib/productApi'
 import type { OrderRecord, UserDashboardResponse } from '../lib/productApi'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { clearUser, getUser } from '../lib/userAuth'
@@ -112,6 +113,7 @@ function UserDashboardPage() {
 
   return (
     <main className="site-shell gallery-page products-page-shell user-dashboard-shell">
+      <SEO title="My Dashboard" description="View your Pure Himalyan order history and account details." noIndex />
       <Header />
 
       <section className="gallery-collection gallery-page-content user-dashboard-content user-dashboard-page">

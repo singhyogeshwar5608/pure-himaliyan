@@ -3,6 +3,7 @@ import '../App.css'
 import MediaGallery from '../components/MediaGallery'
 import { fetchGallery } from '../lib/productApi'
 import type { GalleryRecord } from '../lib/productApi'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -32,6 +33,7 @@ function GalleryPage() {
 
   return (
     <main className="site-shell gallery-page">
+      <SEO title="Gallery" description="Browse the Pure Himalyan media library — images and videos showcasing authentic Himalayan Shilajit resin." canonical="https://purehimalyan.com/gallery" />
       <Header />
 
       <section className="gallery-collection gallery-page-content">

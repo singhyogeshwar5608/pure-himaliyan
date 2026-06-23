@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import '../App.css'
+import { SEO, ProductStructuredData, BreadcrumbStructuredData } from '../components/SEO'
 import OrderModal from '../components/OrderModal'
 import { ProductMaharasayanStoriesSection } from '../components/ProductDetailSocialProof'
 import { createOrder, createRazorpayOrder, fetchProduct, getGalleryVideoEmbedUrl, resolveProductImageUrl, verifyRazorpayPayment, reviewApi } from '../lib/productApi'
@@ -418,6 +419,33 @@ function ProductDetailPage() {
 
   return (
     <main className="site-shell gallery-page product-detail-page-shell">
+      {product ? (
+        <>
+          <SEO
+            title={product.name}
+            description={product.short_description || product.description || `Buy ${product.name} — Premium Himalayan Shilajit at best price. Lab-tested, high potency.`}
+            canonical={`https://purehimalyan.com/products/${product.slug}`}
+            ogImage={resolveProductImageUrl(product.image_url)}
+            ogType="product"
+          />
+          <ProductStructuredData
+            name={product.name}
+            description={product.short_description || product.description || product.name}
+            image={resolveProductImageUrl(product.image_url)}
+            price={Number(product.price)}
+            url={`https://purehimalyan.com/products/${product.slug}`}
+            reviewAverage={reviewStats?.average}
+            reviewCount={reviewStats?.total}
+          />
+          <BreadcrumbStructuredData
+            items={[
+              { name: 'Home', url: 'https://purehimalyan.com/' },
+              { name: 'Products', url: 'https://purehimalyan.com/products' },
+              { name: product.name, url: `https://purehimalyan.com/products/${product.slug}` },
+            ]}
+          />
+        </>
+      ) : null}
       <Header />
 
       <div className="product-detail-breadcrumb-wrap">

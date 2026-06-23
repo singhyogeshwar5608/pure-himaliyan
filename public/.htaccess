@@ -11,6 +11,9 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 # Laravel API routing
 RewriteRule ^api/(.*)$ backend/public/index.php [L]
 
+# Dynamic sitemap
+RewriteRule ^sitemap.xml$ backend/public/index.php [L]
+
 # Existing files/folders skip
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d

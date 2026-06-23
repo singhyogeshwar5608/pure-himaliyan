@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../AdminPortal.css'
+import { SEO } from '../components/SEO'
 import ProductManagementPanel from '../components/ProductManagementPanel'
 import { clearAdminUser } from '../lib/adminAuth'
 import type { AdminUser } from '../lib/adminAuth'
@@ -37,6 +38,7 @@ function AdminDashboardPage({ user }: Props) {
 
   return (
     <div className="dashboard-layout">
+      <SEO title="Admin Dashboard" description="Pure Himalyan admin panel — manage your store products and settings." noIndex />
       <div className="dashboard-topbar">
         <span className="dashboard-topbar-brand">Admin Panel</span>
         <button className="dashboard-menu-button" type="button" aria-label="Toggle menu" onClick={toggleSidebar}>

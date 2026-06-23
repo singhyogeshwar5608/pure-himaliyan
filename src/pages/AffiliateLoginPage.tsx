@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import '../AdminPortal.css'
 import { buildApiUrl } from '../lib/productApi'
+import { SEO } from '../components/SEO'
 import { getAffiliateUser, saveAffiliateUser } from '../lib/affiliateAuth'
 
 type AuthResponse = {
@@ -67,6 +68,7 @@ function AffiliateLoginPage() {
 
   return (
     <div className="portal-shell">
+      <SEO title="Affiliate Login / Register" description="Join the Pure Himalyan affiliate program — earn commissions by referring customers to premium Himalayan Shilajit." noIndex />
       <div className="portal-card">
         <h1>{mode === 'register' ? 'Affiliate Register' : 'Affiliate Login'}</h1>
         <p className="portal-subtitle">

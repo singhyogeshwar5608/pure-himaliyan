@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import '../AdminPortal.css'
 import '../App.css'
 import { buildApiUrl } from '../lib/productApi'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { saveUser, getUser } from '../lib/userAuth'
@@ -88,6 +89,7 @@ function UserLoginPage() {
 
   return (
     <main className="site-shell gallery-page">
+      <SEO title="User Login / Register" description="Login or create your Pure Himalyan account to order Himalayan Shilajit and track your purchases." canonical="https://purehimalyan.com/user/login" noIndex />
       <Header />
 
       <div className="portal-shell" style={{ minHeight: '60vh', padding: '4rem 1rem' }}>

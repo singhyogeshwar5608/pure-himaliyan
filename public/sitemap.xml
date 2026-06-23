@@ -12,12 +12,22 @@
   </url>
   <url>
     <loc>https://purehimalyan.com/gallery</loc>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://purehimalyan.com/contact</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
+    <loc>https://purehimalyan.com/blog</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://purehimalyan.com/privacy</loc>
+    <priority>0.4</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://purehimalyan.com/terms</loc>
+    <priority>0.4</priority>
+    <changefreq>yearly</changefreq>
   </url>
 </urlset>

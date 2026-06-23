@@ -10,6 +10,7 @@ import GalleryManagementPanel from '../components/GalleryManagementPanel'
 import OrdersManagementPanel from '../components/OrdersManagementPanel'
 import ReviewManagementPanel from '../components/ReviewManagementPanel'
 import MobileBannerManagementPanel from '../components/MobileBannerManagementPanel'
+import { SEO } from '../components/SEO'
 import { clearAdminUser } from '../lib/adminAuth'
 import type { AdminUser } from '../lib/adminAuth'
 
@@ -65,6 +66,7 @@ function SuperAdminDashboardPage({ user }: Props) {
 
   return (
     <div className="dashboard-layout">
+      <SEO title="Super Admin Dashboard" description="Pure Himalyan super admin panel — full store management including orders, products, reviews, banners, gallery, and users." noIndex />
       <div className="dashboard-topbar">
         <span className="dashboard-topbar-brand">Super Admin</span>
         <button className="dashboard-menu-button" type="button" aria-label="Toggle menu" onClick={toggleSidebar}>

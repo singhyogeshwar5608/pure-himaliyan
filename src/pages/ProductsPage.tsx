@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { fetchProducts, resolveProductImageUrl, type ProductRecord } from '../lib/productApi'
 import '../App.css'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -43,6 +44,7 @@ function ProductsPage() {
 
   return (
     <main className="site-shell gallery-page products-page-shell">
+      <SEO title="Products" description="Browse our range of premium Himalayan Shilajit resin — lab-tested, high potency, and sustainably sourced for wellness." canonical="https://purehimalyan.com/products" />
       <Header />
 
       <section className="gallery-collection gallery-page-content">

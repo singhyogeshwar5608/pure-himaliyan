@@ -1,5 +1,6 @@
 import '../App.css'
 import '../App.css'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -133,6 +134,7 @@ function PrivacyPolicyPage() {
 
   return (
     <main className="site-shell legal-page">
+      <SEO title="Privacy Policy" description="Read the Pure Himalyan privacy policy — how we collect, use, and protect your personal data when you shop Himalayan Shilajit." canonical="https://purehimalyan.com/privacy" />
       <Header />
 
       <section className="legal-hero legal-hero-modern">

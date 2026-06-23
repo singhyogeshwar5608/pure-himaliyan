@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../App.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { SEO } from '../components/SEO'
 import { fetchBlogSections, buildApiUrl } from '../lib/productApi'
 import type { BlogSectionRecord } from '../lib/productApi'
 
@@ -41,6 +42,7 @@ function BlogPage() {
 
   return (
     <main className="site-shell">
+      <SEO title="Blog" description="Read about the benefits, usage, and science behind Pure Himalyan Shilajit — your guide to natural wellness and vitality." canonical="https://purehimalyan.com/blog" />
       <Header />
 
       <section className="gallery-collection gallery-page-content product-detail-page" style={{ paddingTop: '7rem' }}>

@@ -1,5 +1,6 @@
 import '../App.css'
 import '../App.css'
+import { SEO } from '../components/SEO'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -122,6 +123,7 @@ function TermsPage() {
 
   return (
     <main className="site-shell legal-page">
+      <SEO title="Terms & Conditions" description="Review the Pure Himalyan terms and conditions, return policy, and shipping guidelines for Himalayan Shilajit orders." canonical="https://purehimalyan.com/terms" />
       <Header />
 
       <section className="legal-hero legal-hero-modern">
